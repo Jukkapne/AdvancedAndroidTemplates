@@ -1,3 +1,5 @@
 package com.example.lessontemplate
 
-data class User(val fname: String, val lname: String, val age: Int)
+import com.google.firebase.firestore.Exclude
+
+data class User(@get:Exclude val username: String, val fname: String, val lname: String, val age: Int)
