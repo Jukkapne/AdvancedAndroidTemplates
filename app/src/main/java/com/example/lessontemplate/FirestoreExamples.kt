@@ -17,7 +17,7 @@ fun Greeting(name: String) {
 fun GetAllUsers(){
     var fireStore = Firebase.firestore;
 
-    fireStore.collection("users")
+    fireStore.collection("test")
         .get()
         .addOnSuccessListener {
             it.documents.forEach { doc ->
