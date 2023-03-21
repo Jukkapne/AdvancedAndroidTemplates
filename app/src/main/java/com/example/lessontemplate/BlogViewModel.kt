@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 
 class BlogViewModel: ViewModel() {
-
     var blogs = mutableStateListOf<String>()
         private set
 

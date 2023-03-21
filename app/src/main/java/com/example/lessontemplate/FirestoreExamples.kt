@@ -1,11 +1,24 @@
 package com.example.lessontemplate
 
 import android.util.Log
+import androidx.compose.material.Button
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
+@Composable
+fun AuthExample() {
+    val vm: FirebaseAuthViewModel =  viewModel()
+    
+    
+    vm.signInUser("reima@reima.com", "reimarii")
+    Button(onClick = { vm.addPersonalMessage("Hello") }) {
+
+    }
+}
 
 @Composable
 fun Greeting(name: String) {
