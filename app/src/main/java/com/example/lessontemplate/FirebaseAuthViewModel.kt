@@ -42,11 +42,13 @@ class FirebaseAuthViewModel: ViewModel() {
         }
     }
 
+    //Made an update here. The question mark was missing and that's why
+    //the fUser was nullable.
     fun addPersonalMessage(msg: String){
         viewModelScope.launch {
-            user.value.let { fUser ->
+            user.value?.let { fUser ->
                 Firebase.firestore.collection("udata")
-                    .document("MuIcmKC7aHObF1zLGYSY7apGtYY2")
+                    .document(fUser.uid)
                     .set(mapOf("msg" to msg))
                     .addOnSuccessListener {
                         Log.d("******", "Sign in done!!")
