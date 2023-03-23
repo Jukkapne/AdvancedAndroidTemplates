@@ -1,5 +1,9 @@
 package com.example.lessontemplate.view
 
+import android.net.Uri
+import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
@@ -33,6 +37,37 @@ fun ShowStorageImage() {
         }
         Image(painter = painter , contentDescription = "images")
     }
-    
+}
 
+@Composable
+fun PickImage() {
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
+
+    var launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()){
+        imageUri = it
+    }
+    
+    Column() {
+        Button(onClick = { launcher.launch("image/*") }) {
+            Text(text = "Open image")
+        }
+        Button(onClick = { fileToStorage(imageUri) }) {
+            Text(text = "Send image to storage")
+        }
+    }
+}
+
+fun fileToStorage(uri: Uri?){
+    var imageRef = Firebase.storage.reference.child("profile.jpg")
+
+    uri?.let{ u ->
+        imageRef.putFile(u)
+            .addOnSuccessListener {
+                Log.d("***", "Image uploaded")
+            }
+            .addOnFailureListener{
+                Log.e("***", it.message.toString())
+            }
+    }
 }

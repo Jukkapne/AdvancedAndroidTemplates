@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.lessontemplate.ui.theme.LessonTemplateTheme
+import com.example.lessontemplate.view.PickImage
 import com.example.lessontemplate.view.ShowStorageImage
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ShowStorageImage()
+                    PickImage()
                 }
             }
         }
