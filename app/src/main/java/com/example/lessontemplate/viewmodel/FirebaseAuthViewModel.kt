@@ -1,4 +1,4 @@
-package com.example.lessontemplate
+package com.example.lessontemplate.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 
 class FirebaseAuthViewModel: ViewModel() {
 
-    var user = mutableStateOf<FirebaseUser?>(null);
+    var user = mutableStateOf<FirebaseUser?>(null)
+    var msg = mutableStateOf<String>("")
 
     fun registerUser(email: String, pw: String ){
         viewModelScope.launch {
@@ -31,6 +32,7 @@ class FirebaseAuthViewModel: ViewModel() {
 
     fun signInUser(email: String, pw: String ){
         viewModelScope.launch {
+
             Firebase.auth.signInWithEmailAndPassword(email, pw)
                 .addOnSuccessListener {
                     user.value = it.user
@@ -57,7 +59,22 @@ class FirebaseAuthViewModel: ViewModel() {
                         Log.e("******", it.message.toString())
                     }
             }
+        }
+    }
 
+    fun getPersonalMessage(){
+        viewModelScope.launch {
+            user.value?.let {
+                Firebase.firestore.collection("udata")
+                    .document(it.uid)
+                    .get()
+                    .addOnSuccessListener { doc ->
+                        msg.value = doc.get("msg").toString()
+                    }
+                    .addOnFailureListener { ex ->
+                        Log.e("******", ex.message.toString())
+                    }
+            }
         }
     }
 

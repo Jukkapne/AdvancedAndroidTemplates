@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.lessontemplate.viewmodel.BlogViewModel
 
 @Composable
 fun FirstExercise() {
