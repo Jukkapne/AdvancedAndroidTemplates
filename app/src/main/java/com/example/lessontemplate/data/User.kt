@@ -1,4 +1,4 @@
-package com.example.lessontemplate.model
+package com.example.lessontemplate.data
 
 import com.google.firebase.firestore.Exclude
 

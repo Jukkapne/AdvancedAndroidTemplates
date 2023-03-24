@@ -6,7 +6,7 @@ import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.lessontemplate.model.User
+import com.example.lessontemplate.data.User
 import com.example.lessontemplate.viewmodel.FirebaseViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
