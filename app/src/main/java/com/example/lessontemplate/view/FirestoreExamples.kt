@@ -7,13 +7,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lessontemplate.model.User
-import com.example.lessontemplate.viewmodel.FirebaseAuthViewModel
+import com.example.lessontemplate.viewmodel.FirebaseViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 @Composable
 fun AuthExample() {
-    val vm: FirebaseAuthViewModel =  viewModel()
+    val vm: FirebaseViewModel =  viewModel()
     
     
     vm.signInUser("reima@reima.com", "reimarii")

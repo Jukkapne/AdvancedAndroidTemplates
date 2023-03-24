@@ -43,6 +43,8 @@ fun ShowStorageImage() {
 fun PickImage() {
     var imageUri by remember { mutableStateOf<Uri?>(null) }
 
+
+
     var launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()){
         imageUri = it
@@ -64,7 +66,9 @@ fun fileToStorage(uri: Uri?){
     uri?.let{ u ->
         imageRef.putFile(u)
             .addOnSuccessListener {
-                Log.d("***", "Image uploaded")
+                imageRef.downloadUrl.addOnSuccessListener { remoteUri ->
+                    Log.d("***", remoteUri.toString())
+                }
             }
             .addOnFailureListener{
                 Log.e("***", it.message.toString())

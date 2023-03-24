@@ -12,7 +12,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.lessontemplate.viewmodel.FirebaseAuthViewModel
+import com.example.lessontemplate.viewmodel.FirebaseViewModel
 
 //In this exercise you may use the FirebaseAuthViewModel and expand it if needed
 
@@ -21,7 +21,7 @@ fun MainAuthView() {
     //Check here if the user is logged in and show either login or welcome screen.
     //Use the viewmodel so that this composable is recomposed if the user status changes
 
-    val vm : FirebaseAuthViewModel = viewModel()
+    val vm : FirebaseViewModel = viewModel()
 
     if(vm.user.value == null){
         LoginForm()
@@ -34,7 +34,7 @@ fun MainAuthView() {
 @Composable
 fun LoginForm() {
 
-    val vm : FirebaseAuthViewModel = viewModel()
+    val vm : FirebaseViewModel = viewModel()
 
     //Add functionality to login the user
     var username by remember { mutableStateOf("") }
@@ -70,7 +70,7 @@ fun LoginForm() {
 
 @Composable
 fun Welcome() {
-    val vm : FirebaseAuthViewModel = viewModel()
+    val vm : FirebaseViewModel = viewModel()
     vm.getPersonalMessage()
     //Add here view that shows welcome message with the user's email.
     //Add also button for log out
