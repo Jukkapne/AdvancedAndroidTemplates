@@ -145,4 +145,26 @@ class FirebaseViewModel: ViewModel() {
                 }
         }
     }
+
+    /**
+     * Listens to document changes in blogs collection.
+     * We get notification every time a new document is added or existing modified
+     */
+    fun listenToMsgChanges(){
+        viewModelScope.launch {
+            Firebase.firestore.collection("blogs")
+                .addSnapshotListener { snapshot, error ->
+                    if(error != null){
+                        Log.e("--", error.message.toString())
+                    }else{
+                        snapshot?.let{
+                            snapshot.documentChanges.forEach { doc ->
+                                Log.d("----", doc.document.get("msg").toString())
+                            }
+                        }
+                    }
+                }
+
+        }
+    }
 }
