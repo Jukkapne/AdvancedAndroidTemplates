@@ -33,27 +33,3 @@ fun MainCameraView() {
     }
 }
 
-@OptIn(ExperimentalPermissionsApi::class)
-@Composable
-fun CameraAndRecording() {
-    val permissionMultipleState = rememberMultiplePermissionsState(
-        permissions = listOf(
-            Manifest.permission.CAMERA,
-            Manifest.permission.RECORD_AUDIO
-        )
-    )
-
-    if(permissionMultipleState.allPermissionsGranted){
-        Log.e("", "Permissions granted")
-    }else{
-        if(permissionMultipleState.shouldShowRationale){
-            Log.e("", "Permissions rationale")
-        }else{
-            Log.e("", "Permissions denied")
-        }
-        SideEffect {
-            permissionMultipleState.launchMultiplePermissionRequest()
-        }
-    }
-
-}
