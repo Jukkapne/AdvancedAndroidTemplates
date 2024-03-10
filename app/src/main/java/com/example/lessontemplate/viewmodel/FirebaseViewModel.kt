@@ -42,6 +42,7 @@ class FirebaseViewModel: ViewModel() {
      * Signs in the user and fetches the profile image from the firebase storage
      */
     fun signInUser(email: String, pw: String ){
+        Log.d("login", "signing in"+email+pw)
         viewModelScope.launch {
 
             Firebase.auth.signInWithEmailAndPassword(email, pw)

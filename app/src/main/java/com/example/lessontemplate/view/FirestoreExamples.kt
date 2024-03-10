@@ -1,6 +1,7 @@
 package com.example.lessontemplate
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
@@ -14,11 +15,14 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun AuthExample() {
     val vm: FirebaseViewModel =  viewModel()
-    
-    
-    vm.signInUser("reima@reima.com", "reimarii")
-    Button(onClick = { vm.addPersonalMessage("Hello") }) {
 
+
+    vm.signInUser("jukka.nevalainen@oamk.fi", "F1rebasedemo")
+    Column {
+
+    Greeting(name = "Android")
+    Button(onClick = { vm.addPersonalMessage("MOI") }) {
+    }
     }
 }
 
@@ -31,8 +35,8 @@ fun Greeting(name: String) {
 
 fun GetAllUsers(){
     var fireStore = Firebase.firestore;
-
-    fireStore.collection("test")
+Log.d("getallusers", "getting all users")
+    fireStore.collection("users")
         .get()
         .addOnSuccessListener {
             it.documents.forEach { doc ->
@@ -46,7 +50,7 @@ fun GetUser(){
     var fireStore = Firebase.firestore;
 
     fireStore.collection("users")
-        .document("repe")
+        .document("k7PgUI2eWg5BdkLSqoe7")
         .get()
         .addOnSuccessListener {
             it.get("").toString()
