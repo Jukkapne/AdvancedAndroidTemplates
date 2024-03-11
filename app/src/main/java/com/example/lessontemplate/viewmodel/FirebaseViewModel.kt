@@ -42,7 +42,7 @@ class FirebaseViewModel: ViewModel() {
      * Signs in the user and fetches the profile image from the firebase storage
      */
     fun signInUser(email: String, pw: String ){
-        Log.d("login", "signing in"+email+pw)
+        Log.d("login", "signing in $email $pw")
         viewModelScope.launch {
 
             Firebase.auth.signInWithEmailAndPassword(email, pw)
@@ -111,8 +111,12 @@ class FirebaseViewModel: ViewModel() {
     /**
      * Sends profile image to the firebase storage using user email as file name without dot.
      * After successful upload, the remote url is retrieved and saved to state.
+     *
+     * Example of Uri value from the image picker:
+     * content://com.android.providers.media.documents/document/image%3A98237
+     *
      */
-    fun sendProfileImage(fileUri: Uri?){
+    private fun sendProfileImage(fileUri: Uri?){
         user.value?.let{ fUser ->
             fileUri?.let{ fUri ->
                 viewModelScope.launch {
@@ -135,17 +139,26 @@ class FirebaseViewModel: ViewModel() {
     /**
      * Gets the user profile image url and saves it to state
      */
-    fun getProfileImage(){
-        user.value?.let {fUser ->
-            Firebase.storage.reference
-                .child(fUser.email.toString().replace(".", ""))
-                .downloadUrl
+    private fun getProfileImage(){
+        user.value?.let { fUser ->
+            // Muodosta polku käyttäen käyttäjän sähköpostiosoitetta, korvaten pisteet ja @-merkin
+            val storagePath = fUser.email.toString().replace(".", "").replace("@", "")
+            // Tulosta logiin muodostettu polku ennen kuin yrität hakea profiilikuvaa
+            Log.d("---------------", "Attempting to get profile image from: $storagePath/profile.jpg")
+
+            Firebase.storage.reference.child("$storagePath/profile.jpg").downloadUrl
                 .addOnSuccessListener {
-                    Log.d("---------------", it.toString())
+                    // Logi, kun profiilikuvan URL on onnistuneesti haettu
+                    Log.d("---------------", "Profile image URL: ${it.toString()}")
                     profileImageUrl.value = it
+                }
+                .addOnFailureListener {
+                    // Logi, jos profiilikuvan haku epäonnistuu
+                    Log.e("---------------", "Failed to get profile image: ${it.message}")
                 }
         }
     }
+
 
     /**
      * Listens to document changes in blogs collection.
