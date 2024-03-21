@@ -28,6 +28,11 @@ class MainActivity : ComponentActivity() {
                     //GameView()
                     //ShowStorageImage()
                     //PickImage()
+                    //AnimAppear()
+                    //AnimValues()
+                    //AnimInf()
+
+
                 }
             }
         }
