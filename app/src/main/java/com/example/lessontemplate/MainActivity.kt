@@ -23,8 +23,11 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     //CameraPermissionsView()
-                    MainAuthView(viewModel)
+                    //MainAuthView(viewModel)
                     //AuthExample()
+                    //GameView()
+                    //ShowStorageImage()
+                    //PickImage()
                 }
             }
         }

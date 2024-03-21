@@ -38,7 +38,7 @@ fun MainAuthView(viewModel: FirebaseViewModel ) {
 
 @Composable
 fun LoginForm(viewModel: FirebaseViewModel) {
-    val imageUri by remember { viewModel.profileImageUrl } // Huomaa, että käytämme tätä seuraamaan LiveData- tai StateFlow-muuttujan muutoksia.
+    val imageUri by remember { viewModel.profileImageUrl }
     val context = LocalContext.current
     //val vm : FirebaseViewModel = viewModel()
     val vm = viewModel

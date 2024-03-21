@@ -27,10 +27,13 @@ fun ShowStorageImage() {
     Column() {
         Button(onClick = {
             Firebase.storage.reference
-                .child("moth.jpg")
+                .child("jukkanevalainenoamkfi/profile.jpg")
                 .getBytes(1024*1024)
                 .addOnSuccessListener {
                     byteArray = it
+                }
+                .addOnFailureListener {
+                    Log.e("***", it.message.toString())
                 }
         }) {
             Text(text = "Get image")
@@ -46,6 +49,15 @@ fun PickImage() {
 
 
     var launcher = rememberLauncherForActivityResult(
+
+
+          //Activity contract is a predefined contract for getting content of any type from the device
+          //This contract is used to get content from the device. The type of the content is defined in the launch method.
+          //The result is returned as a Uri object.
+          //When you use this contract, it instructs the system to show a UI that allows the user to pick content.
+          //Depending on the MIME type you specify (in this case, "image/*"), it can open a file explorer, gallery, or any appropriate picker that lets the user choose an image.
+
+
         contract = ActivityResultContracts.GetContent()){
         imageUri = it
     }
