@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.lessontemplate.data.User
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -179,6 +180,20 @@ class FirebaseViewModel: ViewModel() {
                     }
                 }
 
+        }
+    }
+
+    fun addUser(user: User) {
+        viewModelScope.launch {
+            Firebase. .firestore.collection("users")
+                .document(user.username)
+                .set(user)
+                .addOnSuccessListener {
+                    Log.d("******", "Adding document was success!!")
+                }
+                .addOnFailureListener{
+                    Log.e("******", it.message.toString())
+                }
         }
     }
 }

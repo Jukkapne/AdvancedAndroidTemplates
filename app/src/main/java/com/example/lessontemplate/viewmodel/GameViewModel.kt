@@ -69,4 +69,18 @@ class GameViewModel: ViewModel() {
                 }
         }
     }
+    fun postGame(game: Game) {
+        viewModelScope.launch {
+            try {
+                val response = GameAPI.instance?.sendGame(game) // Use 'game', not 'Game'
+                // Handle the response, e.g., updating UI state or LiveData to indicate success or failure
+                Log.d("GameViewModel", "Response: $response")
+            } catch(e: Exception) {
+                // Handle error, e.g., log or show an error message
+                Log.e("GameViewModel", "Error: $e")
+            }
+        }
+    }
+
+
 }

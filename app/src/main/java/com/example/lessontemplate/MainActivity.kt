@@ -8,13 +8,21 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.lessontemplate.ui.theme.LessonTemplateTheme
-import com.example.lessontemplate.view.*
+import com.example.lessontemplate.view.AnimAppear
+import com.example.lessontemplate.view.CameraPermissionsView
+import com.example.lessontemplate.view.GameView
+import com.example.lessontemplate.view.PickImage
+import com.example.lessontemplate.view.ShowStorageImage
+import com.example.lessontemplate.view.SubmitGameForm
+
 import com.example.lessontemplate.viewmodel.FirebaseViewModel
+import com.example.lessontemplate.viewmodel.GameViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModel = FirebaseViewModel()
+        val gamevievModel = GameViewModel()
         setContent {
             LessonTemplateTheme {
                 // A surface container using the 'background' color from the theme
@@ -31,6 +39,8 @@ class MainActivity : ComponentActivity() {
                     //AnimAppear()
                     //AnimValues()
                     //AnimInf()
+                    //SubmitGameForm(gamevievModel)
+                    AddUserView(viewModel)
 
 
                 }

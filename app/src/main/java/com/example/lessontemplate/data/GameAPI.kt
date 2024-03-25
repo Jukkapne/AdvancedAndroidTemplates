@@ -34,7 +34,8 @@ interface GameAPI {
 
     @Headers("Content-type: application/json")
     @POST("game")
-    suspend fun sendGame(@Body body: Game, @Field("name") name: String) : Game
+    suspend fun sendGame(@Body game: Game): Game
+
 
 //Authorization: Bearer safdölkjsaölkfjölkdsajsa
     @POST

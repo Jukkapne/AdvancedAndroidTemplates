@@ -174,7 +174,7 @@ fun takePhoto(
 
     imageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(context), object: ImageCapture.OnImageSavedCallback{
         override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-            Log.d("------", outputFileResults.savedUri.toString() )
+            Log.d("--<<<<<<<<<<<<<<<<<<<<----", outputFileResults.savedUri.toString() )
             onImageCaptured(outputFileResults.savedUri)
         }
 

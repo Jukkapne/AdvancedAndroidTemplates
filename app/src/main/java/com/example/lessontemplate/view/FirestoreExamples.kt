@@ -1,11 +1,17 @@
 package com.example.lessontemplate
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.OutlinedButton
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.lessontemplate.data.User
 import com.example.lessontemplate.viewmodel.FirebaseViewModel
@@ -25,6 +31,26 @@ fun AuthExample() {
     }
     }
 }
+
+@Composable
+fun AddUserView(viewModel: FirebaseViewModel = viewModel()) {
+    var user by remember { mutableStateOf(User("", "", "", 0)) }
+
+
+    Column {
+        OutlinedTextField(value = user.username, onValueChange = {user.username = it})
+        OutlinedTextField(value = user.fname, onValueChange = {user.fname = it})
+        OutlinedTextField(value = user.lname, onValueChange = {user.lname = it})
+        OutlinedTextField(value = user.age.toString(), onValueChange = {user.age = it.toInt()})
+
+        OutlinedButton(onClick = { viewModel.addUser(user) }) {
+            Text(text = "Add user")
+        }
+    }
+
+}
+
+
 
 @Composable
 fun Greeting(name: String) {
@@ -87,4 +113,5 @@ fun AddUser(){
             Log.e("******", it.message.toString())
         }
 }
+
 
